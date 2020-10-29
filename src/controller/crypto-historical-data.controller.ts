@@ -6,7 +6,7 @@ export class CryptoHistoricalDataController {
   constructor(private readonly cryptoHistoricalDataService: CryptoHistoricalDataService) {}
 
   @Get()
-  findAll(): string {
-    return this.cryptoHistoricalDataService.findAll();
+  async findAll(): Promise<string[]> {
+    return await this.cryptoHistoricalDataService.findByCurrency('tezos');
   }
 }
