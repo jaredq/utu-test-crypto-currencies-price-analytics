@@ -1,24 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { getManager, getRepository } from "typeorm";
-import { CryptoHistoricalData } from '../entity/CryptoHistoricalData';
+import CryptoHistoricalData from '../entity/CryptoHistoricalData';
 
 @Injectable()
 export class CryptoHistoricalDataService {
-  async findAll(): Promise<string[]> {
-    const cryptoHistoricalDataList = await getManager().find(CryptoHistoricalData);
-    return cryptoHistoricalDataList.map(o => o.id.toString());
+  async findAll(): Promise<CryptoHistoricalData[]> {
+    return await getManager().find(CryptoHistoricalData, {
+      order: {
+        date: -1
+      }
+    });
   }
 
-  async findByCurrency(currency): Promise<string[]> {
+  async findLatestByCurrency(currency: string): Promise<CryptoHistoricalData[]> {
     const cryptoHistoricalDataRepos = getRepository(CryptoHistoricalData);
-    const cryptoHistoricalDataList = await cryptoHistoricalDataRepos.find({
+    return await cryptoHistoricalDataRepos.find({
       where: {
         currency
       },
       order: {
-        marketCap: -1
-      }
+        date: -1
+      },
+      skip: 0,
+      take: 31
     });
-    return cryptoHistoricalDataList.map(o => o.id.toString());
   }
 }

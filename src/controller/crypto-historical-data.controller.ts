@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import CryptoHistoricalData from '../entity/CryptoHistoricalData';
 import { CryptoHistoricalDataService } from '../service/crypto-historical-data.service';
 
 @Controller('crypto-historical-data')
@@ -6,7 +7,7 @@ export class CryptoHistoricalDataController {
   constructor(private readonly cryptoHistoricalDataService: CryptoHistoricalDataService) {}
 
   @Get()
-  async findAll(): Promise<string[]> {
-    return await this.cryptoHistoricalDataService.findByCurrency('tezos');
+  async findAll(): Promise<CryptoHistoricalData[]> {
+    return await this.cryptoHistoricalDataService.findLatestByCurrency('tezos');
   }
 }
