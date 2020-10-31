@@ -14,6 +14,8 @@ interface PriceAnalyticsData {
   marketCap?: number;
 
   lastUpdatedDate?: Date;
+
+  error?: string;
 }
 
 export default PriceAnalyticsData;

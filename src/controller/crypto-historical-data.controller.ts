@@ -8,6 +8,6 @@ export class CryptoHistoricalDataController {
 
   @Get()
   async findAll(): Promise<CryptoHistoricalData[]> {
-    return await this.cryptoHistoricalDataService.findLatestByCurrency('tezos');
+    return await this.cryptoHistoricalDataService.findAll();
   }
 }

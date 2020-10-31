@@ -12,7 +12,7 @@ export class CryptoHistoricalDataService {
     });
   }
 
-  async findLatestByCurrency(currency: string): Promise<CryptoHistoricalData[]> {
+  async findLatestByCurrency(currency: string, limit: number): Promise<CryptoHistoricalData[]> {
     const cryptoHistoricalDataRepos = getRepository(CryptoHistoricalData);
     return await cryptoHistoricalDataRepos.find({
       where: {
@@ -22,7 +22,7 @@ export class CryptoHistoricalDataService {
         date: -1
       },
       skip: 0,
-      take: 31
+      take: limit
     });
   }
 }
