@@ -1,10 +1,14 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CryptoHistoricalDataService } from '../service/crypto-historical-data.service';
-import CryptoHistoricalData from '../entity/CryptoHistoricalData';
-import PriceAnalyticsData from '../models/PriceAnalyticsData';
+import CryptoHistoricalData from '../entity/crypto-historical-data';
+import PriceAnalyticsData from '../models/price-analytics-data';
 import currencyTypes from '../constants/currency-types';
 
 import PriceAnalyticsUtil from '../utils/price-analytics.util';
+
+import {
+  MAX_ROWS_FOR_ANALYTICS,
+} from '../constants/constants';
 
 @Controller('price-analytics-data')
 export class PriceAnalyticsDataController {
@@ -31,13 +35,12 @@ export class PriceAnalyticsDataController {
       };
     }
 
-    const limit = 31;
+    const limit = MAX_ROWS_FOR_ANALYTICS;
     const historicalDataList: CryptoHistoricalData[] = await this.cryptoHistoricalDataService.findLatestByCurrency(
       currency,
       limit,
     );
-    // TODO remove console log
-    console.log('historicalDataList', historicalDataList);
+
     if (historicalDataList.length === 0) {
       return {
         currency,

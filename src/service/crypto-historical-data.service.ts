@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { getManager, getRepository } from "typeorm";
-import CryptoHistoricalData from '../entity/CryptoHistoricalData';
+import CryptoHistoricalData from '../entity/crypto-historical-data';
 
 @Injectable()
 export class CryptoHistoricalDataService {

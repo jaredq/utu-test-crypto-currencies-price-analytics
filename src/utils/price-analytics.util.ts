@@ -1,13 +1,15 @@
-import CryptoHistoricalData from '../entity/CryptoHistoricalData';
-import PriceAnalyticsData from '../models/PriceAnalyticsData';
+import CryptoHistoricalData from '../entity/crypto-historical-data';
+import PriceAnalyticsData from '../models/price-analytics-data';
 
 import NumberUtil from './number.util';
 
-const ROW_NO_FOR_LATEST_DATA = 0;
-const ROW_NO_FOR_ONE_DAY_AGO = 1;
-const ROW_NO_FOR_SEVEN_DAYS_AGO = 7;
-const ROW_NO_FOR_ONE_MONTH_AGO = 30;
-const MAX_ROWS_FOR_ANALYTICS = ROW_NO_FOR_ONE_MONTH_AGO;
+import {
+  ROW_NO_FOR_LATEST_DATA,
+  ROW_NO_FOR_ONE_DAY_AGO,
+  ROW_NO_FOR_SEVEN_DAYS_AGO,
+  ROW_NO_FOR_ONE_MONTH_AGO,
+  MAX_ROWS_FOR_ANALYTICS,
+} from '../constants/constants';
 
 export default class PriceAnalyticsUtil {
   static analyePrice(
@@ -17,7 +19,11 @@ export default class PriceAnalyticsUtil {
 
     let latestData: CryptoHistoricalData;
     let earlyData: CryptoHistoricalData;
-    for (let i = 0; i < cryptoHistoricalDataList.length && i <= MAX_ROWS_FOR_ANALYTICS; i++) {
+    for (
+      let i = 0;
+      i < cryptoHistoricalDataList.length && i < MAX_ROWS_FOR_ANALYTICS;
+      i++
+    ) {
       if (i == ROW_NO_FOR_LATEST_DATA) {
         latestData = cryptoHistoricalDataList[i];
         result = {
@@ -25,16 +31,25 @@ export default class PriceAnalyticsUtil {
           price: latestData.close,
           volumeIn24Hours: latestData.volume,
           marketCap: latestData.marketCap,
-        }
+        };
       } else if (i == ROW_NO_FOR_ONE_DAY_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn24Hours = NumberUtil.percentage(earlyData.close, latestData.close);
+        result.changeDifferenceIn24Hours = NumberUtil.percentage(
+          earlyData.close,
+          latestData.close,
+        );
       } else if (i == ROW_NO_FOR_SEVEN_DAYS_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn7Days = NumberUtil.percentage(earlyData.close, latestData.close);
+        result.changeDifferenceIn7Days = NumberUtil.percentage(
+          earlyData.close,
+          latestData.close,
+        );
       } else if (i == ROW_NO_FOR_ONE_MONTH_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn1Month = NumberUtil.percentage(earlyData.close, latestData.close);
+        result.changeDifferenceIn1Month = NumberUtil.percentage(
+          earlyData.close,
+          latestData.close,
+        );
       }
     }
     return result;
