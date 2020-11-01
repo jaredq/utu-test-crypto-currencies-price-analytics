@@ -4,7 +4,7 @@ export default class NumberUtil {
    * @param base 
    * @param current 
    */
-  static percentage(base: number, current: number) {
+  static calcChangeDifferencePercentage(base: number, current: number) {
     return ((current - base) / base) * 100;
   }
 }

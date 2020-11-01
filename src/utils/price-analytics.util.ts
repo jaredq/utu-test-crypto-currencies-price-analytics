@@ -34,19 +34,19 @@ export default class PriceAnalyticsUtil {
         };
       } else if (i == ROW_NO_FOR_ONE_DAY_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn24Hours = NumberUtil.percentage(
+        result.changeDifferenceIn24Hours = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
           latestData.close,
         );
       } else if (i == ROW_NO_FOR_SEVEN_DAYS_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn7Days = NumberUtil.percentage(
+        result.changeDifferenceIn7Days = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
           latestData.close,
         );
       } else if (i == ROW_NO_FOR_ONE_MONTH_AGO) {
         earlyData = cryptoHistoricalDataList[i];
-        result.changeDifferenceIn1Month = NumberUtil.percentage(
+        result.changeDifferenceIn1Month = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
           latestData.close,
         );
