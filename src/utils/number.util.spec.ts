@@ -5,5 +5,6 @@ describe('NumberUtil', () => {
   it('calcChangeDifferencePercentage', () => {
     expect(NumberUtil.calcChangeDifferencePercentage(50, 10)).toBe(-80);
     expect(NumberUtil.calcChangeDifferencePercentage(50, 60)).toBe(20);
+    expect(NumberUtil.calcChangeDifferencePercentage(0, 10)).toBeUndefined();
   });
 });
