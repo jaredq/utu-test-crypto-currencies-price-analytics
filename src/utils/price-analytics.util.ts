@@ -24,7 +24,7 @@ export default class PriceAnalyticsUtil {
       i < cryptoHistoricalDataList.length && i < MAX_ROWS_FOR_ANALYTICS;
       i++
     ) {
-      if (i == ROW_NO_FOR_LATEST_DATA) {
+      if (i === ROW_NO_FOR_LATEST_DATA) {
         latestData = cryptoHistoricalDataList[i];
         result = {
           currency: latestData.currency,
@@ -32,19 +32,19 @@ export default class PriceAnalyticsUtil {
           volumeIn24Hours: latestData.volume,
           marketCap: latestData.marketCap,
         };
-      } else if (i == ROW_NO_FOR_ONE_DAY_AGO) {
+      } else if (i === ROW_NO_FOR_ONE_DAY_AGO) {
         earlyData = cryptoHistoricalDataList[i];
         result.changeDifferenceIn24Hours = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
           latestData.close,
         );
-      } else if (i == ROW_NO_FOR_SEVEN_DAYS_AGO) {
+      } else if (i === ROW_NO_FOR_SEVEN_DAYS_AGO) {
         earlyData = cryptoHistoricalDataList[i];
         result.changeDifferenceIn7Days = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
           latestData.close,
         );
-      } else if (i == ROW_NO_FOR_ONE_MONTH_AGO) {
+      } else if (i === ROW_NO_FOR_ONE_MONTH_AGO) {
         earlyData = cryptoHistoricalDataList[i];
         result.changeDifferenceIn1Month = NumberUtil.calcChangeDifferencePercentage(
           earlyData.close,
